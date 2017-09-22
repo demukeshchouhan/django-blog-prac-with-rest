@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Post title {% endblock title%}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1>Post List</h1>
+            <ul>
+                    <li class="item">
+                        <strong>{{ data.title }}</strong>
+                        <p> <img src="{{data.title}}" alt=""> </p>
+                        <p>{{data.description}}</p>
+                        <h2>Comments:</h2>
+                        <p>
+                            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                {{ form.as_ul }}
+                                <input type="submit" value="comment"/>
+                            </form>
+                        </p>
+                        <ul class="comment">
+                            {% for c in data.comment_set.all %}
+                                <li>{{ c.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+            </ul>
+           
+           
+        </div>
+    </div>
+{% endblock content %}
